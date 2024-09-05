@@ -9,7 +9,7 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @Entity
-public class Article {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +22,7 @@ public class Article {
     private User user;
     @ManyToOne
     @JoinColumn(name="theme_id", nullable = false)
-    private Theme theme;
+    private Topic theme;
 
     @CreationTimestamp
     private Instant created_At;

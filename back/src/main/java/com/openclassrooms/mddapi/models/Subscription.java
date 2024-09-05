@@ -1,9 +1,9 @@
 package com.openclassrooms.mddapi.models;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
@@ -15,6 +15,6 @@ public class Subscription {
     @JoinColumn(name="user_id", nullable = false)
     private User user;
     @ManyToOne
-    @JoinColumn(name="theme_id", nullable = false)
-    private Theme theme;
+    @JoinColumn(name="topic_id", nullable = false)
+    private Topic theme;
 }

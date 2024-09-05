@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-public class Theme {
+public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

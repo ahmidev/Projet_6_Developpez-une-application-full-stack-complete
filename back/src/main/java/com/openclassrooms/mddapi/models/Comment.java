@@ -1,9 +1,9 @@
 package com.openclassrooms.mddapi.models;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
@@ -17,8 +17,8 @@ public class Comment {
     @JoinColumn(name="user_id")
     private User user;
     @ManyToOne
-    @JoinColumn(name="article_id")
-    private Article article;
+    @JoinColumn(name="post_id")
+    private Post article;
 
 
 }

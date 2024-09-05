@@ -1,8 +1,9 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.dtos.fromView.CreateArticleDto;
-import com.openclassrooms.mddapi.dtos.toView.ArticleDto;
-import com.openclassrooms.mddapi.services.ArticleService;
+
+import com.openclassrooms.mddapi.dtos.CreatePostDTO;
+import com.openclassrooms.mddapi.dtos.PostDTO;
+import com.openclassrooms.mddapi.services.interfaces.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,20 +12,20 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/articles")
-public class ArticleController {
+public class PostController {
 
     @Autowired
-    ArticleService articleService;
+    PostService postService;
 
     @GetMapping("")
-    List<ArticleDto> getAllUsersSubscribedArticles(@PathVariable Long userId){
+    List<PostDTO> getAllUsersSubscribedArticles(@PathVariable Long userId){
 
-        return articleService.getAllUsersSubscribedArticles(userId);
+        return postService.getAllUsersSubscribedArticles(userId);
     }
 
     @PostMapping("/create")
-    ArticleDto createAnArticle(@RequestBody CreateArticleDto createArticle){
-        return articleService.createAnArticle(createArticle);
+    PostDTO createAnArticle(@RequestBody CreatePostDTO createArticle){
+        return postService.createAnArticle(createArticle);
     }
 
 
