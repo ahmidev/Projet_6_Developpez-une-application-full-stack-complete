@@ -1,11 +1,10 @@
 package com.openclassrooms.mddapi.models;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SourceType;
 
-import javax.persistence.*;
 import java.time.Instant;
 @Data
 @NoArgsConstructor
