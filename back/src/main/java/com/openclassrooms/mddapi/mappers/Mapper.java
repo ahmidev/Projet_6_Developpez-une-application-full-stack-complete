@@ -112,7 +112,7 @@ public class Mapper {
     public User toUserEntity(UserRegisterDTO userRegisterDTO) {
         User user = new User();
         user.setEmail(userRegisterDTO.getEmail());
-        user.setName(userRegisterDTO.getName());
+        user.setName(userRegisterDTO.getUsername());
         user.setPassword(userRegisterDTO.getPassword());
         return user;
     }

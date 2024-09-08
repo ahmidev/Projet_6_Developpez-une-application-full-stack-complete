@@ -12,17 +12,17 @@ import java.util.List;
 @NoArgsConstructor
 public class PostMapper {
 
-    public List<PostDTO> toDto(List<Post> posts){
-        List<PostDTO> articlesDto = new ArrayList<>();
-
-        for(Post article : posts){
-            PostDTO articleDto = toDto(article);
-            articlesDto.add(articleDto);
-        }
-
-        return articlesDto;
-
-    }
+//    public List<PostDTO> toDto(List<Post> posts){
+//        List<PostDTO> articlesDto = new ArrayList<>();
+//
+//        for(Post article : posts){
+//            PostDTO articleDto = toDto(article);
+//            articlesDto.add(articleDto);
+//        }
+//
+//        return articlesDto;
+//
+//    }
 
 //    public PostDTO toDto(Post post){
 //        PostDTO articleDto = new PostDTO();
