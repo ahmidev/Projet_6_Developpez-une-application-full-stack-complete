@@ -14,6 +14,9 @@ public class PostDTO {
     private Long id;
     private String title;
     private String content;
-    private List<Comment> comments;
+    private UserDTO user;
+
+    private TopicDTO topicDTO;
+    private List<CommentDTO> comments;
     private Instant createdAt;
 }

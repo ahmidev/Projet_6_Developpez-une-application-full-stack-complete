@@ -1,11 +1,14 @@
 package com.openclassrooms.mddapi.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -17,15 +20,22 @@ public class Post {
     private String title;
 
     private String content;
+
     @ManyToOne
     @JoinColumn(name="owner_id",nullable = false)
+    @JsonManagedReference
     private User user;
+
     @ManyToOne
-    @JoinColumn(name="theme_id", nullable = false)
-    private Topic theme;
+    @JoinColumn(name="topic_id", nullable = false)
+    @JsonManagedReference
+    private Topic topic;
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
     @CreationTimestamp
-    private Instant created_At;
+    private Instant createdAt;
 
 
 }

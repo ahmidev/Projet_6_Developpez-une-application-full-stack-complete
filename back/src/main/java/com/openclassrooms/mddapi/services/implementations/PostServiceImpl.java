@@ -32,25 +32,43 @@ public class PostServiceImpl implements PostService{
     @Autowired
     PostMapper postMapper;
 
-//    public List<PostDTO> getAllUsersSubscribedArticles(Long userId){
-//        List<Post> articles = postRepository.getPostsByUserID(userId);
-//        return postMapper.toDto(articles);
-//    }
-//    @Transactional
-//    public PostDTO createAnArticle(CreatePostDTO createPost){
-//        Post post = new Post();
-//        post.setContent(createPost.getContent());
-//        post.setTitle(createPost.getTitle());
-//
-//        Optional<User> optUser = userRepository.findById(createPost.getUserId());
-//        Optional<Topic> optTheme = topicRepository.findById(createPost.getThemeId());
-//        if(optTheme.isPresent() && optUser.isPresent() ){
-//            post.setTheme(optTheme.get());
-//            post.setUser(optUser.get());
-//            postRepository.saveAndFlush(post);
-//            return postMapper.toDto(post);
-//        }
-//
-//        throw new RuntimeException("theme inexistant");
-//    }
+ 
+public List<PostDTO> getAllUsersSubscribedPosts(Long userId){
+    List<Post> posts = postRepository.getPostsByUserID(userId);
+    return postMapper.toDto(posts);
+}
+
+ 
+
+    @Transactional
+    public PostDTO createAnPost(CreatePostDTO createPost){
+        Post post = new Post();
+        post.setContent(createPost.getContent());
+        post.setTitle(createPost.getTitle());
+
+        Optional<User> optUser = userRepository.findById(createPost.getUserId());
+        Optional<Topic> optTheme = topicRepository.findById(createPost.getThemeId());
+        if(optTheme.isPresent() && optUser.isPresent() ){
+            post.setTopic(optTheme.get());
+            post.setUser(optUser.get());
+            postRepository.saveAndFlush(post);
+            return postMapper.toDto(post);
+        }
+
+        throw new RuntimeException("theme inexistant");
+    }
+
+    @Transactional
+    public PostDTO getPostById(Long postId){
+        Optional<Post> optPost = postRepository.findById(postId);
+
+        if(optPost.isPresent()){
+            Post post = optPost.get();
+            post.getComments();
+            post.getTopic();
+            return postMapper.toDto(post);
+        }
+
+        throw new RuntimeException("Cet post n'existe pas en Bdd");
+    }
 }

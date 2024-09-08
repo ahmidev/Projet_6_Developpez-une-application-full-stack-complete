@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,12 @@ public class Topic {
     private Long id;
 
     private String name;
-    @OneToMany(mappedBy = "theme")
+
+    private String description;
+    @OneToMany(mappedBy = "topic")
+    @JsonBackReference
     private List<Subscription> subscriptions;
+    @OneToMany(mappedBy = "topic")
+    @JsonBackReference
+    private List<Post> posts;
 }
