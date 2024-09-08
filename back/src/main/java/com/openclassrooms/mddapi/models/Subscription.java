@@ -16,5 +16,5 @@ public class Subscription {
     private User user;
     @ManyToOne
     @JoinColumn(name="topic_id", nullable = false)
-    private Topic theme;
+    private Topic topic;
 }

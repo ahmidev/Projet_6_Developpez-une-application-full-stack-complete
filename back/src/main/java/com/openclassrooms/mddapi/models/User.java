@@ -39,5 +39,5 @@ public class User {
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "user")
-    private List<Post> articles;
+    private List<Post> posts;
 }
