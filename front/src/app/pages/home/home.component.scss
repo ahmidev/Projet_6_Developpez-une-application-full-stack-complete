@@ -1,55 +1,7 @@
-// /* Espace de travail centré */
-// .workspace {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   height: 100vh; /* Prend toute la hauteur de l'écran */
-//   width: 100%;
-//   padding: 20px; /* Espacement interne pour éviter que les éléments soient collés aux bords */
-//   box-sizing: border-box; /* Assure que le padding est inclus dans la taille */
-// }
-
-// /* Logo centré */
-// .workspace .logo {
-//   width: 100%;
-//   max-width: 412px; /* Garde la taille maximale du logo tout en étant responsive */
-//   height: auto;
-//   display: flex;
-//   justify-content: center;
-//   margin-bottom: 20px; /* Ajoute un espacement sous le logo */
-// }
-
-// .workspace .logo img {
-//   max-width: 100%; /* L'image reste responsive */
-//   height: auto;
-// }
-
-// /* Boutons centrés avec espace entre eux */
-// .workspace .buttons {
-//   display: flex;
-//   flex-direction: column; /* Par défaut, en colonne */
-//   gap: 20px; /* Ajoute un espace entre les boutons */
-//   width: 100%;
-//   max-width: 377px; /* Largeur maximale des boutons */
-// }
-
-// /* Boutons côte à côte sur grand écran */
-// @media (min-width: 992px) {
-//   .workspace .buttons {
-//     flex-direction: row; /* En ligne sur les grands écrans */
-//     justify-content: space-between; /* Crée de l'espace entre les boutons */
-//   }
-
-//   .workspace .buttons button {
-//     flex: 1; /* Les boutons s'adaptent à l'espace disponible */
-//     max-width: 180px; /* Limite la taille maximale des boutons */
-//   }
-// }
 .custom-button {
   width: 200px;
   height: 50px;
 }
 .custom-gap {
-  gap: 4rem; /* Tu peux ajuster cette valeur pour écarter plus ou moins les boutons */
+  gap: 4rem; 
 }
