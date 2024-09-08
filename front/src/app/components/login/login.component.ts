@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
             console.log('USER##',user);
             
             this.sessionService.logIn(user);
-            //this.router.navigate(['/board']);
+            this.router.navigate(['/article-feed']);
           });
         },
         error: (error) => {
@@ -64,6 +64,6 @@ export class LoginComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/']);  // Retour à la page précédente ou page d'accueil
+    this.router.navigate(['/']);  
   }
 }

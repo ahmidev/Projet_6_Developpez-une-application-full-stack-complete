@@ -16,8 +16,9 @@ import { ArticleFeedComponent } from './pages/article-feed/article-feed.componen
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ThemesComponent } from './pages/themes/themes.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptor } from './common/interceptor/jwt.interceptor';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent, CreateArticleComponent, ArticleCardComponent, ThemeCardComponent, ProfilFormComponent, SignUpComponent, LoginComponent, ArticleFeedComponent, ProfileComponent, ThemesComponent],
@@ -30,7 +31,7 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
