@@ -1,0 +1,43 @@
+<!-- Navbar qui s'affiche sur grand écran -->
+<nav class="navbar navbar-light bg-light d-none d-lg-block">
+    <div class="container-fluid">
+      <a href="#" class="navbar-brand">
+        <img src="/assets/logo_p6.png" alt="MDD Logo" class="img-fluid" style="max-width: 150px;" />
+      </a>
+    </div>
+  </nav>
+  
+  <!-- Contenu principal avec flèche de retour et formulaire d'inscription -->
+  <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <!-- Flèche de retour en arrière visible sur mobile et desktop -->
+    <div class="w-100 mb-4 d-flex justify-content-start">
+      <a href="#" class="text-dark" style="font-size: 34px;">
+        <i class="bi bi-arrow-left"></i>
+      </a>
+    </div>
+  
+    <!-- Logo visible uniquement sur mobile -->
+    <div class="logo mb-4 d-lg-none">
+      <img src="/assets/logo_p6.png" alt="MDD Logo" class="img-fluid" style="max-width: 150px;" />
+    </div>
+  
+    <h2 class="mb-4">Inscription</h2>
+  
+    <!-- Formulaire d'inscription -->
+    <form class="w-100" style="max-width: 400px;">
+      <div class="mb-3">
+        <label for="username" class="form-label">Nom d'utilisateur</label>
+        <input type="text" class="form-control" id="username" placeholder="Entrez votre nom d'utilisateur" />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Adresse e-mail</label>
+        <input type="email" class="form-control" id="email" placeholder="Entrez votre adresse e-mail" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe" />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+    </form>
+  </div>
+  
