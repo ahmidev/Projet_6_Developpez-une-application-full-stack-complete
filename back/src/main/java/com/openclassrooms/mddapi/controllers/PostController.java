@@ -17,16 +17,16 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @GetMapping("")
-    List<PostDTO> getAllUsersSubscribedArticles(@PathVariable Long userId){
-
-        return postService.getAllUsersSubscribedArticles(userId);
-    }
-
-    @PostMapping("/create")
-    PostDTO createAnArticle(@RequestBody CreatePostDTO createArticle){
-        return postService.createAnArticle(createArticle);
-    }
+//    @GetMapping("")
+//    List<PostDTO> getAllUsersSubscribedArticles(@PathVariable Long userId){
+//
+//        return postService.getAllUsersSubscribedArticles(userId);
+//    }
+//
+//    @PostMapping("/create")
+//    PostDTO createAnArticle(@RequestBody CreatePostDTO createArticle){
+//        return postService.createAnArticle(createArticle);
+//    }
 
 
 }

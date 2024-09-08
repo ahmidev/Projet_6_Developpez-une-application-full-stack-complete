@@ -48,7 +48,7 @@ public class AuthService {
 
         User user = new User();
         user.setEmail(userRegisterDTO.getEmail());
-        user.setName(userRegisterDTO.getName());
+        user.setName(userRegisterDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
         User createdUser = userRepository.save(user);
         String token = tokenProvider.generateToken(createdUser);

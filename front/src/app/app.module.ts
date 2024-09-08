@@ -15,6 +15,9 @@ import { LoginComponent } from './components/login/login.component';
 import { ArticleFeedComponent } from './pages/article-feed/article-feed.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ThemesComponent } from './pages/themes/themes.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent, CreateArticleComponent, ArticleCardComponent, ThemeCardComponent, ProfilFormComponent, SignUpComponent, LoginComponent, ArticleFeedComponent, ProfileComponent, ThemesComponent],
@@ -22,7 +25,10 @@ import { ThemesComponent } from './pages/themes/themes.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MatButtonModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

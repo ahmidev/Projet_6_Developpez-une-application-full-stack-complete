@@ -1,0 +1,26 @@
+body, .container {
+    padding-top: 0;
+    margin-top: 0;
+  }
+   
+.logo-desktop {
+    max-width: 150px;
+  }
+  
+  .logo-mobile {
+    width: 400px;
+    min-width: 150px;
+  }
+  
+  .arrow-back {
+    font-size: 34px;
+  }
+  
+  .form-inscription {
+    max-width: 400px;
+  }
+  
+  .arrow-back {
+    cursor: pointer; 
+  }
+  

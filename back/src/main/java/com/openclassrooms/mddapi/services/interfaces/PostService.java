@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PostService {
 
-    List<PostDTO> getAllUsersSubscribedArticles(Long userId);
-
-    PostDTO createAnArticle(CreatePostDTO createArticle);
+//    List<PostDTO> getAllUsersSubscribedArticles(Long userId);
+//
+//    PostDTO createAnArticle(CreatePostDTO createArticle);
 }
