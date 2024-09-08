@@ -13,6 +13,7 @@ import { CreateArticleComponent } from './components/create-article/create-artic
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
 const routes: Routes = [
+  { path: 'home', component: HomeComponent },        
   { path: 'sign-up', component: SignUpComponent },        
   { path: 'article-card', component: ArticleCardComponent },        
   { path: 'create-article', component: CreateArticleComponent },       
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'article-feed', component: ArticleFeedComponent, canActivate: [AuthGuard] },  
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },  
   { path: 'themes', component: ThemesComponent, canActivate: [AuthGuard] },    
-  { path: '**', redirectTo: '/login' }  
+  { path: '**', redirectTo: '/home' }  
 ];
 
 @NgModule({

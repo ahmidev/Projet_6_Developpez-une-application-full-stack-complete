@@ -1,15 +1,9 @@
-
-
-
-<!-- Contenu avec logo et boutons -->
 <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
   <div class="logo mb-4">
     <img src="/assets/logo_p6.png" alt="MDD Logo" class="img-fluid" />
   </div>
   <div class="buttons d-flex flex-column flex-lg-row custom-gap">
-    <button class="btn btn-outline-dark custom-button" >Se connecter</button>
-    <button class="btn btn-outline-dark custom-button">S'inscrire</button>
+    <button class="btn btn-outline-dark custom-button" (click)="goToLogin()">Se connecter</button>
+    <button class="btn btn-outline-dark custom-button" (click)="goToSignUp()">S'inscrire</button>
   </div>
 </div>
-
-
