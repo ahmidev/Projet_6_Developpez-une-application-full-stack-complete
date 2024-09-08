@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query(value = "SELECT * FROM article WHERE theme_id IN (SELECT theme_id FROM subscription WHERE user_id = :userId)", nativeQuery = true)
+    @Query(value = "SELECT * FROM post WHERE topic_id IN (SELECT topic_id FROM subscription WHERE user_id = :userId)", nativeQuery = true)
     List<Post> getPostsByUserID(@Param("userId") Long userId);
 }

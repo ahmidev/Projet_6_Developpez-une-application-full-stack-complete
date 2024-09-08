@@ -11,22 +11,40 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/articles")
+@RequestMapping("/api/post")
 public class PostController {
 
     @Autowired
     PostService postService;
 
-//    @GetMapping("")
-//    List<PostDTO> getAllUsersSubscribedArticles(@PathVariable Long userId){
-//
-//        return postService.getAllUsersSubscribedArticles(userId);
-//    }
-//
-//    @PostMapping("/create")
-//    PostDTO createAnArticle(@RequestBody CreatePostDTO createArticle){
-//        return postService.createAnArticle(createArticle);
-//    }
+    /**
+     * récupère tous les articles liés à l'utilisateur connecté
+     * @param userId
+     * @return
+     */
+    @GetMapping("/user/{userId}")
+    List<PostDTO> getAllUsersSubscribedPosts(@PathVariable Long userId){
+
+        return postService.getAllUsersSubscribedPosts(userId);
+    }
+
+    @PostMapping("/create")
+    PostDTO createAnPost(@RequestBody CreatePostDTO createPost){
+        return postService.createAnPost(createPost);
+    }
+
+    /**
+     * récupère un article par son id
+     * @param articleId
+     * @return
+     */
+    @GetMapping("{articleId}")
+    PostDTO getPostByID(@PathVariable Long articleId){
+
+        return postService.getPostById(articleId);
+    }
 
 
 }
+
+
