@@ -14,14 +14,13 @@ import { CreateArticleComponent } from './components/create-article/create-artic
 // to manage unauthenticated user to access private routes
 const routes: Routes = [
   { path: 'home', component: HomeComponent },        
-  { path: 'sign-up', component: SignUpComponent },        
-  { path: 'article-card', component: ArticleCardComponent },        
-  { path: 'create-article', component: CreateArticleComponent },       
   { path: 'login', component: LoginComponent },          
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },  
+  { path: 'sign-up', component: SignUpComponent },        
   { path: 'article-feed', component: ArticleFeedComponent, canActivate: [AuthGuard] },  
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },  
+  { path: 'article/:id', component: ArticleCardComponent , canActivate: [AuthGuard]},        
+  { path: 'create-article', component: CreateArticleComponent, canActivate: [AuthGuard] },       
   { path: 'themes', component: ThemesComponent, canActivate: [AuthGuard] },    
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },  
   { path: '**', redirectTo: '/home' }  
 ];
 

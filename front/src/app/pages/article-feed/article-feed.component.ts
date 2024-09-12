@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Article } from 'src/app/common/models/article';
 import { User } from 'src/app/common/models/user';
@@ -20,7 +21,8 @@ export class ArticleFeedComponent implements OnInit {
   constructor(
     private articleService: ArticleService,
     private userService: UserService,
-    private toastr: ToastrService  
+    private toastr: ToastrService,
+    private router: Router 
   ) { }
 
   ngOnInit(): void {
@@ -67,6 +69,10 @@ export class ArticleFeedComponent implements OnInit {
       }
     });
   }
+
+  viewArticle(articleId: number): void {
+    this.router.navigate(['/article', articleId]);
+  } 
 
   sortArticlesByDate(): void {
     this.articles.sort((a, b) => {

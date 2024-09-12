@@ -41,8 +41,8 @@ export class CreateArticleComponent implements OnInit {
   }
   
     getUser(): void {
-      if (this.sessionService.user) {
-        this.user = this.sessionService.user;
+      if (this.sessionService.getUser()) {
+        this.user = this.sessionService.getUser()!;
         console.log(this.user);
       } else {
         console.log('Utilisateur non trouvé dans la session.');
