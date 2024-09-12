@@ -47,7 +47,7 @@ public List<PostDTO> getAllUsersSubscribedPosts(Long userId){
         post.setTitle(createPost.getTitle());
 
         Optional<User> optUser = userRepository.findById(createPost.getUserId());
-        Optional<Topic> optTheme = topicRepository.findById(createPost.getThemeId());
+        Optional<Topic> optTheme = topicRepository.findById(createPost.getTopicId());
         if(optTheme.isPresent() && optUser.isPresent() ){
             post.setTopic(optTheme.get());
             post.setUser(optUser.get());

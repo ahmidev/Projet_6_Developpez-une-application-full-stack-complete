@@ -4,6 +4,7 @@ package com.openclassrooms.mddapi.services;
 
 import com.openclassrooms.mddapi.dtos.UserDTO;
 import com.openclassrooms.mddapi.mappers.Mapper;
+import com.openclassrooms.mddapi.mappers.UserMapper;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final Mapper mapper;
+    private final UserMapper mapper;
 
 
     /**
@@ -29,7 +30,7 @@ public class UserService {
      */
     public UserDTO getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id: " + id));
-        return mapper.toUserDTO(user);
+        return mapper.toDto(user);
     }
 
 
@@ -43,7 +44,7 @@ public class UserService {
     public UserDTO getUserByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found with email %s ".formatted(email)));
-        return mapper.toUserDTO(user);
+        return mapper.toDto(user);
     }
 
 

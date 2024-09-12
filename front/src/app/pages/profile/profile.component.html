@@ -21,35 +21,18 @@
   
       <hr class="my-4" />
   
-      <!-- Section Abonnements -->
-      <h4 class="mb-4">Abonnements</h4>
-  
-      <div class="row">
-        <!-- Thème 1 -->
-        <div class="col-12 col-md-6 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title">Titre du thème</h5>
-              <p class="card-text">
-                Description: lorem ipsum is simply dummy text of the printing and typesetting industry...
-              </p>
-              <button class="btn btn-outline-primary w-100">Se désabonner</button>
-            </div>
-          </div>
-        </div>
-        <!-- Thème 2 -->
-        <div class="col-12 col-md-6 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title">Titre du thème</h5>
-              <p class="card-text">
-                Description: lorem ipsum is simply dummy text of the printing and typesetting industry...
-              </p>
-              <button class="btn btn-outline-primary w-100">Se désabonner</button>
-            </div>
-          </div>
-        </div>
+      <h4 class="text-center mb-4">Abonnements</h4>
+
+    <div class="row">
+      <div *ngFor="let theme of themes" class="col-12 col-md-6 mb-4">
+        <app-theme-card 
+        [theme]="theme" 
+        [isSubscribed]="isSubscribed(theme.id)"
+        [inProfile]="true"  
+        (unsubscribe)="unsubscribeFromTheme(theme.id)">
+      </app-theme-card>
       </div>
     </div>
   </div>
+</div>
   

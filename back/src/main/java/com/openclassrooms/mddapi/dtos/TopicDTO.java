@@ -13,5 +13,5 @@ public class TopicDTO {
     private Long id;
     private String name;
     private String description;
-    private List<Subscription> subscriptions;
+    private List<SubscriptionDTO> subscriptions ;
 }
