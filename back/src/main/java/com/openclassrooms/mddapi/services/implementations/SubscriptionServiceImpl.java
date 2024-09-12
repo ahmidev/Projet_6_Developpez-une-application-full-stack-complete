@@ -61,12 +61,20 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public void deleteSubscription(Long userId, Long themeId) {
+    public UserDTO deleteSubscription(Long userId, Long themeId) {
         subscriptionRepository.findByUserIdAndTopicId(userId, themeId)
                 .ifPresentOrElse(user -> {
                     subscriptionRepository.delete(user);
                 }, () -> {
                     throw new RuntimeException();
                 });
+        Optional<User> optUser = userRepository.findById(userId);
+        User user = new User();
+        if (optUser.isPresent()) {
+             user = optUser.get();
+
+        }
+
+        return userMapper.toDto(user);
     }
 }
