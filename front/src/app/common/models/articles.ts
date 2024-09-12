@@ -1,4 +1,4 @@
-import { Theme } from "./themes";
+import { Topic } from "./topic";
 import { User } from "./user";
 
 export interface Articles {
@@ -7,6 +7,6 @@ export interface Articles {
   content: string;
   createdAt: String | null;
   author: User ;
-  theme: Theme | null;
+  theme: any | null;
   comments: Comment[] | null;
 }

@@ -9,25 +9,19 @@ import { Article } from '../common/models/article';
 })
 export class SubscriptionService {
 
-  private pathService = environment.baseUrl ;
+  private baseUrl = environment.baseUrl+"subscription/" ;
 
   constructor(private http: HttpClient) { }
 
-  subscribeToArticle(userId: number, articleId: number): Observable<any> {
-    return this.http.post<any>(`${this.pathService}subscriptions/article`, null, {
-      params: {
-        userId: userId.toString(),
-        articleId: articleId.toString()
-      }
-    });
+  createSubscription(userId: number, topicId: number): Observable<any> {
+    const subscriptionData = { topicId, userId };
+    return this.http.post(`${this.baseUrl}create`, subscriptionData);
   }
 
-  getSubscribedArticles(userId: number): Observable<Article[]> {
-    return this.http.get<Article[]>(`${this.pathService}subscriptions/user/${userId}`);
+  deleteSubscription(userId: number, topicId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}delete/${userId}/${topicId}`);
   }
 
-  unsubscribeFromArticle(userId: number, articleId: number): Observable<void> {
-    return this.http.delete<void>(`${this.pathService}subscriptions/article/${articleId}/user/${userId}`);
-  }
+  
   
 }

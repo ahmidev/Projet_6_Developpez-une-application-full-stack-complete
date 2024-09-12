@@ -15,6 +15,7 @@ export class ArticleFeedComponent implements OnInit {
 
   currentUser!: User;
   articles!: Article[];
+  isAscending: boolean = false;
 
   constructor(
     private articleService: ArticleService,
@@ -40,7 +41,23 @@ export class ArticleFeedComponent implements OnInit {
   loadSubscribedArticles(userId: number): void {
     this.articleService.getArticlesByUser(userId).subscribe({
       next: (data: Article[]) => {
-        this.articles = data;
+        this.articles = data.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          content: item.content,
+          createdAt: item.createdAt,
+          author: {
+            id: item.user.id,
+            name: item.user.name,
+            email: item.user.email
+          },
+          topic: {
+            id: item.topicDTO.id,
+            name: item.topicDTO.name,
+            articles: data.filter((article:any) => article.topicDTO.id === item.topicDTO.id) || null 
+          },
+          comments: item.comments || null
+        }));
         console.log('Articles:', this.articles);
         this.toastr.success('Articles chargés avec succès', 'Succès');
       },
@@ -53,11 +70,24 @@ export class ArticleFeedComponent implements OnInit {
 
   sortArticlesByDate(): void {
     this.articles.sort((a, b) => {
-      const dateA = new Date(a.createdAt as string);
-      const dateB = new Date(b.createdAt as string);
-      return dateB.getTime() - dateA.getTime(); // Tri décroissant
+      const dateA = new Date(a.createdAt!);
+      const dateB = new Date(b.createdAt!);
+
+      if (dateA && dateB) {
+        return this.isAscending
+          ? dateA.getTime() - dateB.getTime()  
+          : dateB.getTime() - dateA.getTime(); 
+      }
+
+      if (!dateA) return 1;
+      if (!dateB) return -1;
+      return 0;
     });
+
+    this.isAscending = !this.isAscending;
+
     console.log('Articles triés par date:', this.articles);
     this.toastr.info('Articles triés par date', 'Information');
   }
+  
 }
