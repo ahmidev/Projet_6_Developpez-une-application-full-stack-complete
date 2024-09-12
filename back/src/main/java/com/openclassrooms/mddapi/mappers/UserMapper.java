@@ -5,12 +5,18 @@ import com.openclassrooms.mddapi.dtos.UserLoginDTO;
 import com.openclassrooms.mddapi.dtos.UserRegisterDTO;
 import com.openclassrooms.mddapi.models.User;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 
 @NoArgsConstructor
 @Component
 public class UserMapper {
+
+    @Autowired
+    SubscriptionMapper subscriptionMapper;
 
     public User toEntity(UserRegisterDTO userRegisterDTO){
         if(userRegisterDTO == null){
@@ -45,7 +51,8 @@ public class UserMapper {
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
         userDto.setId(user.getId());
-        userDto.setSubscriptions(user.getSubscriptions());
+        userDto.setSubscriptions(subscriptionMapper.toDto(user.getSubscriptions()));
+
 
         return userDto;
     }

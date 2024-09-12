@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,21 +19,20 @@ public class Post {
     private Long id;
 
     private String title;
-
+    
+    @Column(length = 5000)
     private String content;
 
     @ManyToOne
     @JoinColumn(name="owner_id",nullable = false)
-    @JsonManagedReference
     private User user;
 
     @ManyToOne
     @JoinColumn(name="topic_id", nullable = false)
-    @JsonManagedReference
     private Topic topic;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     @CreationTimestamp
     private Instant createdAt;

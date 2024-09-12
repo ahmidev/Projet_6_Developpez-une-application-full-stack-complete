@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -17,10 +19,12 @@ public class Topic {
     private String name;
 
     private String description;
+
     @OneToMany(mappedBy = "topic")
     @JsonBackReference
-    private List<Subscription> subscriptions;
+    private List<Subscription> subscriptions = new ArrayList<>();
+
     @OneToMany(mappedBy = "topic")
     @JsonBackReference
-    private List<Post> posts;
+    private List<Post> posts = new ArrayList<>();
 }
