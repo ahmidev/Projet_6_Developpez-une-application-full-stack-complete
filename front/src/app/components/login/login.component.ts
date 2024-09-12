@@ -44,8 +44,6 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', response.token);
           this.toastr.success('Connexion réussie !', 'Succès');
           this.authService.me().subscribe((user: any) => {
-            console.log('USER##',user);
-            
             this.sessionService.logIn(user);
             this.router.navigate(['/article-feed']);
           });

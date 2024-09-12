@@ -21,7 +21,7 @@ export class SignUpComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();  // Retourne à la page précédente
+    this.location.back();  
   }
 
   initForm(): void {

@@ -13,7 +13,7 @@
   <div class="row">
     <!-- Boucle sur les articles pour les afficher -->
     <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let article of articles">
-      <div class="card h-100">
+      <div class="card h-100" (click)="viewArticle(article.id)">
         <div class="card-body">
           <h5 class="card-title">{{ article.title }}</h5>
           <p class="card-subtitle text-muted">{{ article.createdAt | date: 'dd/MM/yyyy, HH:mm' }} | {{ article.author.name }}</p>

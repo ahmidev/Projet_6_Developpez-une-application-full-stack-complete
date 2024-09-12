@@ -1,8 +1,8 @@
 
-  
-  <!-- Page de détail de l'article -->
+  <!-- 
+  Page de détail de l'article
   <div class="container my-4">
-    <!-- Bouton retour en arrière -->
+    Bouton retour en arrière
     <div class="d-flex justify-content-start mb-3">
       <a href="#" class="text-dark" style="font-size: 24px;">
         <i class="bi bi-arrow-left"></i>
@@ -10,7 +10,7 @@
       <h2 class="ms-3">Titre de l’article sélectionné</h2>
     </div>
   
-    <!-- Informations de l'article -->
+    Informations de l'article
     <div class="mb-4">
       <div class="d-flex justify-content-between">
         <p>Date</p>
@@ -23,10 +23,10 @@
       <hr />
     </div>
   
-    <!-- Section des commentaires -->
+    Section des commentaires
     <h4>Commentaires</h4>
   
-    <!-- Commentaire 1 -->
+    Commentaire 1
     <div class="d-flex align-items-start mb-4">
       <div class="comment-avatar me-3">
         <img src="/assets/avatar.png" alt="avatar" class="rounded-circle" style="width: 40px;" />
@@ -37,7 +37,7 @@
       </div>
     </div>
   
-<!-- Ajouter un commentaire avec champ de texte et bouton séparés -->
+ Ajouter un commentaire avec champ de texte et bouton séparés 
 <div class="d-flex align-items-center mt-4" style="gap: 10px;">
     <textarea class="form-control" rows="1" placeholder="Écrivez ici votre commentaire" ></textarea>
     <button class="btn btn-outline-secondary" type="button" style="padding: 10px;">
@@ -46,4 +46,50 @@
   </div>
   
   
-  
+-->
+<div class="container my-4" *ngIf="article">
+  <!-- Bouton retour en arrière -->
+  <div class="d-flex justify-content-start mb-3">
+    <a (click)="goBack()" class="text-dark" style="font-size: 24px;">
+      <i class="bi bi-arrow-left"></i>
+    </a>
+    <h2 class="ms-3">{{ article.title }}</h2>
+  </div>
+
+  <!-- Informations de l'article -->
+  <div class="mb-4">
+    <div class="d-flex justify-content-between">
+      <p>Date : {{ article.createdAt | date: 'dd/MM/yyyy, HH:mm' }}</p>
+      <p>Auteur : {{ article.user.name }}</p>
+      <p>Thème : {{ article.topicDTO.name }}</p>
+    </div>
+    <p>{{ article.content }}</p>
+    <hr />
+  </div>
+
+  <!-- Section des commentaires -->
+  <h4>Commentaires</h4>
+
+  <div *ngFor="let comment of article.comments" class="d-flex align-items-start mb-4">
+    <div class="comment-avatar me-3">
+      <img src="/assets/avatar.png" alt="avatar" class="rounded-circle" style="width: 40px;" />
+    </div>
+    <div class="comment-content bg-light p-3 rounded">
+      <p class="mb-1"><strong>{{ comment.user.name }}</strong></p>
+      <p>{{ comment.content }}</p>
+    </div>
+  </div>
+
+ <!-- Ajouter un commentaire -->
+<div class="d-flex align-items-center mt-4" style="gap: 10px;">
+  <form [formGroup]="commentForm" class="w-100 d-flex">
+    <!-- Zone de texte pour le commentaire -->
+    <textarea class="form-control" formControlName="content" rows="1" placeholder="Écrivez ici votre commentaire"></textarea>
+    <!-- Bouton pour soumettre le commentaire -->
+    <button class="btn btn-outline-secondary" type="button" (click)="submitComment()" style="padding: 10px;">
+      <i class="bi bi-send" style="font-size: 24px; color: purple;"></i>
+    </button>
+  </form>
+</div>
+
+</div>
