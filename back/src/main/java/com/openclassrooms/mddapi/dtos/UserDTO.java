@@ -31,7 +31,7 @@ public class UserDTO {
     @UpdateTimestamp
     private Instant updatedAt;
 
-    private List<Subscription> subscriptions;
+    private List<SubscriptionDTO> subscriptions;
 
 
 }
