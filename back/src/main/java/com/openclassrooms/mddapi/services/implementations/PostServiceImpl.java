@@ -66,6 +66,7 @@ public List<PostDTO> getAllUsersSubscribedPosts(Long userId){
             Post post = optPost.get();
             post.getComments();
             post.getTopic();
+            post.getUser();
             return postMapper.toDto(post);
         }
 

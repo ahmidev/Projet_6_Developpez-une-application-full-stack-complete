@@ -23,8 +23,8 @@ public class SubscriptionController {
     }
 
     @DeleteMapping("/delete/{userId}/{themeId}")
-    void deleteTopic(@PathVariable long userId, @PathVariable long themeId) {
-        subscriptionService.deleteSubscription(userId, themeId);
+    UserDTO deleteTopic(@PathVariable long userId, @PathVariable long themeId) {
+       return subscriptionService.deleteSubscription(userId, themeId);
     }
 
 }
