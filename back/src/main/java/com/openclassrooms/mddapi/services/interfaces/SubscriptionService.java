@@ -7,6 +7,6 @@ public interface SubscriptionService {
 
     UserDTO createSubscription(SubscriptionDTO subscriptionDto);
 
-    void deleteSubscription(Long userId, Long themeId);
+    UserDTO deleteSubscription(Long userId, Long themeId);
 }
 

@@ -3,10 +3,13 @@ package com.openclassrooms.mddapi.controllers;
 import com.openclassrooms.mddapi.dtos.UserDTO;
 import com.openclassrooms.mddapi.dtos.UserLoginDTO;
 import com.openclassrooms.mddapi.dtos.UserRegisterDTO;
+import com.openclassrooms.mddapi.mappers.UserMapper;
 import com.openclassrooms.mddapi.models.AuthSuccess;
+import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.services.AuthService;
-import com.openclassrooms.mddapi.services.UserService;
+import com.openclassrooms.mddapi.services.interfaces.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 
 
 @CrossOrigin
@@ -24,10 +28,12 @@ public class AuthController {
 
     private final AuthService authService;
     private final UserService userService;
+    private final UserMapper userMapper;
 
-    public AuthController(AuthService authService,UserService userService ) {
+    public AuthController(AuthService authService,UserService userService, UserMapper userMapper ) {
         this.authService = authService;
         this.userService = userService;
+        this.userMapper = userMapper;
 
     }
     @PostMapping("/register")
@@ -64,6 +70,9 @@ public class AuthController {
         }
 
         String currentPrincipalName = authentication.getName();
-        return ResponseEntity.ok(userService.getUserByEmail(currentPrincipalName));
+        Optional<User> userOptional = userService.findByEmail(currentPrincipalName);
+        User user = userOptional.get();
+        UserDTO userDTO =   userMapper.toDto(user);
+        return ResponseEntity.ok(userDTO);
     }
 }

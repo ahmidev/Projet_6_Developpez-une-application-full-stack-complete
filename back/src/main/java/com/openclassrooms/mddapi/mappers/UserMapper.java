@@ -3,12 +3,13 @@ package com.openclassrooms.mddapi.mappers;
 import com.openclassrooms.mddapi.dtos.UserDTO;
 import com.openclassrooms.mddapi.dtos.UserLoginDTO;
 import com.openclassrooms.mddapi.dtos.UserRegisterDTO;
+import com.openclassrooms.mddapi.dtos.UserUpdateDTO;
 import com.openclassrooms.mddapi.models.User;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 
 @NoArgsConstructor
@@ -48,6 +49,7 @@ public class UserMapper {
         UserDTO userDto = new UserDTO();
 
         userDto.setCreatedAt(user.getCreatedAt());
+        userDto.setUpdatedAt(user.getUpdatedAt());
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
         userDto.setId(user.getId());
@@ -55,5 +57,23 @@ public class UserMapper {
 
 
         return userDto;
+    }
+
+    public UserUpdateDTO toUpdateDto(User user) {
+        if (user == null) {
+            return null;
+        }
+
+        UserUpdateDTO userUpdateDTO = new UserUpdateDTO();
+        userUpdateDTO.setId(user.getId());
+        userUpdateDTO.setEmail(user.getEmail());
+        userUpdateDTO.setName(user.getName());
+        userUpdateDTO.setCreatedAt(user.getCreatedAt());
+        userUpdateDTO.setUpdatedAt(user.getUpdatedAt());
+        userUpdateDTO.setSubscriptions(subscriptionMapper.toDto(user.getSubscriptions()));
+
+
+
+        return userUpdateDTO;
     }
 }

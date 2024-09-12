@@ -1,8 +1,8 @@
 package com.openclassrooms.mddapi.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.openclassrooms.mddapi.models.Subscription;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,16 +11,18 @@ import java.time.Instant;
 import java.util.List;
 
 @Data
-public class UserDTO {
+public class UserUpdateDTO {
 
     private Long id;
 
-
+    @NotBlank
     private String email;
 
-
+    @NotBlank
     private String name;
 
+    @NotBlank
+    private String tocken;
 
     @Column(name = "created_at")
     @JsonProperty("created_at")
@@ -33,6 +35,5 @@ public class UserDTO {
     private Instant updatedAt;
 
     private List<SubscriptionDTO> subscriptions;
-
 
 }
