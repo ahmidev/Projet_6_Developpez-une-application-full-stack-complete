@@ -1,25 +1,19 @@
-<div class="container min-vh-100 d-flex flex-column  align-items-center">
-  <!-- Formulaire du profil -->
-  <div class="w-100 mt-5" style="max-width: 600px;">
+<div class="container min-vh-100 d-flex flex-column align-items-center">
+  <div class="w-100 mt-5" style="max-width: 600px">
     <h2 class="text-center mb-4">Profil utilisateur</h2>
 
-    <!-- Formulaire pour la mise à jour du profil -->
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="username" class="form-label">Nom d'utilisateur</label>
-        <input type="text" class="form-control" id="username" formControlName="username" placeholder="Nom d'utilisateur" />
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email" placeholder="email@email.fr" />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Nouveau mot de passe</label>
-        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Nouveau mot de passe (facultatif)" />
-      </div>
-      <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="!profileForm.valid">Sauvegarder</button>
-      <button type="button" class="btn btn-outline-danger w-100" (click)="logOut()">Se déconnecter</button>
-    </form>
+    <app-profil-form
+      [user]="user"
+      (formSubmitted)="onSubmit($event)"
+    ></app-profil-form>
+
+    <button
+      type="button"
+      class="btn btn-outline-danger w-100"
+      (click)="logOut()"
+    >
+      Se déconnecter
+    </button>
   </div>
 
   <div class="div-separator"></div>
@@ -28,11 +22,12 @@
   <h4 class="text-center mb-4">Abonnements</h4>
   <div class="row w-100">
     <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let theme of themes">
-      <app-theme-card 
-        [theme]="theme" 
+      <app-theme-card
+        [theme]="theme"
         [isSubscribed]="isSubscribed(theme.id)"
-        [inProfile]="true"  
-        (unsubscribe)="unsubscribeFromTheme(theme.id)">
+        [inProfile]="true"
+        (unsubscribe)="unsubscribeFromTheme(theme.id)"
+      >
       </app-theme-card>
     </div>
   </div>

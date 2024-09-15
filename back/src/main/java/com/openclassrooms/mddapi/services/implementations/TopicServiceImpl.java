@@ -11,15 +11,36 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * Implémentation du service de gestion des sujets (topics).
+ * Cette classe fournit des méthodes pour récupérer tous les sujets disponibles sous forme de DTOs.
+ */
 @Service
 public class TopicServiceImpl implements TopicService {
 
-    @Autowired
-    TopicRepository topicRepository;
+    private final TopicRepository topicRepository;
+    private final TopicMapper topicMapper;
 
-    @Autowired
-    TopicMapper topicMapper;
 
+    /**
+     * Constructeur avec injection des dépendances.
+     *
+     * @param topicRepository le repository permettant l'accès aux données des sujets
+     * @param topicMapper le mapper pour convertir les entités Topic en DTO
+     */
+    @Autowired
+    public TopicServiceImpl(TopicRepository topicRepository, TopicMapper topicMapper) {
+        this.topicRepository = topicRepository;
+        this.topicMapper = topicMapper;
+    }
+
+
+    /**
+     * Récupère tous les sujets (topics) disponibles et les renvoie sous forme de DTOs.
+     *
+     * @return une map contenant la liste des sujets sous forme de DTOs
+     */
     public Map<String, List<TopicDTO>> getAllTopics(){
 
         List<Topic> themes =  topicRepository.findAll();

@@ -1,5 +1,4 @@
-package com.openclassrooms.mddapi.services;
-
+package com.openclassrooms.mddapi.services.implementations;
 
 import com.openclassrooms.mddapi.dtos.UserLoginDTO;
 import com.openclassrooms.mddapi.dtos.UserRegisterDTO;
@@ -7,43 +6,42 @@ import com.openclassrooms.mddapi.models.AuthSuccess;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.UserRepository;
 import com.openclassrooms.mddapi.security.JwtTokenProvider;
+import com.openclassrooms.mddapi.services.interfaces.AuthService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * Service for handling authentication related operations.
+ * Implémentation du service d'authentification.
+ * Fournit les méthodes pour enregistrer et connecter les utilisateurs.
  */
 @Service
-public class AuthService {
+public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
 
     /**
-     * Constructs an AuthService with the specified dependencies.
+     * Constructeur avec injection des dépendances.
      *
-     * @param userRepository the user repository
-     * @param passwordEncoder the password encoder
-     * @param tokenProvider the JWT token provider
+     * @param userRepository le repository pour gérer les utilisateurs
+     * @param passwordEncoder l'encodeur de mot de passe pour sécuriser les mots de passe
+     * @param tokenProvider le fournisseur de jeton JWT pour générer les tokens
      */
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider tokenProvider) {
+    public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider tokenProvider) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
     }
 
     /**
-     * Registers a new user with the given registration details.
-     *
-     * @param userRegisterDTO the user registration data transfer object
-     * @return an AuthSuccess object containing the generated JWT token
-     * @throws IllegalArgumentException if the email is already in use
+     * {@inheritDoc}
      */
+    @Override
     public AuthSuccess register(UserRegisterDTO userRegisterDTO) {
         if (userRepository.existsByEmail(userRegisterDTO.getEmail())) {
-            throw new IllegalArgumentException("Email already in use");
+            throw new IllegalArgumentException("Email déjà utilisé");
         }
 
         User user = new User();
@@ -55,30 +53,23 @@ public class AuthService {
         return new AuthSuccess(token);
     }
 
-
     /**
-     * Logs in a user with the given login details.
-     *
-     * @param userLoginDTO the user login data transfer object
-     * @return an AuthSuccess object containing the generated JWT token
-     * @throws UsernameNotFoundException if the email or password is invalid
+     * {@inheritDoc}
      */
+    @Override
     public AuthSuccess login(UserLoginDTO userLoginDTO) {
         User existingUser = findByEmail(userLoginDTO.getEmail());
         if (existingUser == null || !passwordEncoder.matches(userLoginDTO.getPassword(), existingUser.getPassword())) {
-            throw new UsernameNotFoundException("Invalid email or password");
+            throw new UsernameNotFoundException("Email ou mot de passe invalide");
         }
         String token = tokenProvider.generateToken(existingUser);
         return new AuthSuccess(token);
     }
 
-
     /**
-     * Finds a user by their email address.
-     *
-     * @param email the email address to search for
-     * @return the User object if found, otherwise null
+     * {@inheritDoc}
      */
+    @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
     }

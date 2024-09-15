@@ -37,9 +37,9 @@ export class LoginComponent implements OnInit {
   submit(): void {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
-      
+
       this.authService.login(this.loginForm.value).subscribe({
-        next: (response:AuthSuccess) => {
+        next: (response: AuthSuccess) => {
           console.log(response);
           localStorage.setItem('token', response.token);
           this.toastr.success('Connexion réussie !', 'Succès');
@@ -62,6 +62,6 @@ export class LoginComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/']);  
+    this.router.navigate(['/']);
   }
 }
