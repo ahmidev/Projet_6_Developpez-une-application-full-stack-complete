@@ -17,6 +17,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * Classe de configuration de la sécurité pour l'application Spring Boot.
+ * Cette configuration inclut la gestion des filtres de sécurité, la gestion des CORS
+ * et l'authentification avec des jetons JWT.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -24,11 +29,24 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /**
+     * Constructeur de la configuration de sécurité.
+     *
+     * @param unauthorizedHandler le point d'entrée pour gérer les accès non autorisés
+     * @param jwtAuthenticationFilter le filtre JWT pour authentifier les requêtes
+     */
     public SecurityConfig(JwtAuthenticationEntryPoint unauthorizedHandler, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.unauthorizedHandler = unauthorizedHandler;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
+    /**
+     * Configure la chaîne de filtres de sécurité pour les requêtes HTTP.
+     *
+     * @param http l'objet HttpSecurity utilisé pour la configuration
+     * @return l'objet SecurityFilterChain configuré
+     * @throws Exception si une erreur survient lors de la configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
@@ -49,16 +67,34 @@ public class SecurityConfig {
         return http.build();
     }
 
+
+    /**
+     * Définit le bean pour l'encodage des mots de passe avec BCrypt.
+     *
+     * @return un objet BCryptPasswordEncoder
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Définit le bean pour la gestion de l'authentification.
+     *
+     * @param authenticationConfiguration la configuration de l'authentification
+     * @return un objet AuthenticationManager
+     * @throws Exception si une erreur survient lors de la configuration de l'authentification
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    /**
+     * Définit un filtre CORS pour gérer les requêtes cross-origin.
+     *
+     * @return un objet CorsFilter
+     */
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

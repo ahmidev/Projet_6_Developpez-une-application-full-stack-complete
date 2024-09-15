@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Article } from 'src/app/common/models/article';
 import { ArticleService } from 'src/app/services/article.service';
-import { Location } from '@angular/common';  
+import { Location } from '@angular/common';
 import { SessionService } from 'src/app/services/session.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommentService } from 'src/app/services/comment.service';
@@ -17,18 +16,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ArticleCardComponent implements OnInit {
 
   article!: any;
-  commentForm!: FormGroup;; 
-  currentUser: any; 
+  commentForm!: FormGroup;;
+  currentUser: any;
 
 
   constructor(
-    private route: ActivatedRoute,  
+    private route: ActivatedRoute,
     private articleService: ArticleService,
     private location: Location,
-    private commentService: CommentService, 
-    private sessionService: SessionService, 
+    private commentService: CommentService,
+    private sessionService: SessionService,
     private fb: FormBuilder,
-    private toastr: ToastrService 
+    private toastr: ToastrService
   ) { }
 
 
@@ -41,13 +40,13 @@ export class ArticleCardComponent implements OnInit {
 
   initCommentForm(): void {
     this.commentForm = this.fb.group({
-      content: ['', Validators.required] 
+      content: ['', Validators.required]
     });
   }
 
 
   loadArticle(): void {
-    const articleId = this.route.snapshot.paramMap.get('id');  
+    const articleId = this.route.snapshot.paramMap.get('id');
     if (articleId) {
       this.articleService.getArticleById(articleId).subscribe({
         next: (data: any) => {
@@ -62,7 +61,7 @@ export class ArticleCardComponent implements OnInit {
   }
 
   getCurrentUser(): void {
-      this.currentUser =  this.sessionService.getUser();
+    this.currentUser = this.sessionService.getUser();
   }
 
 
@@ -80,10 +79,9 @@ export class ArticleCardComponent implements OnInit {
 
     this.commentService.createComment(comment).subscribe({
       next: (response) => {
-        console.log('reponse comment############ ', response)
         this.toastr.success('Commentaire ajouté avec succès', 'Succès');
-        this.article.comments.push(response); // Ajouter le commentaire à la liste existante
-        this.commentForm.reset(); // Réinitialiser le champ de commentaire
+        this.article.comments.push(response);
+        this.commentForm.reset();
       },
       error: (error) => {
         console.error('Erreur lors de l\'ajout du commentaire', error);
@@ -94,6 +92,6 @@ export class ArticleCardComponent implements OnInit {
 
 
   goBack(): void {
-    this.location.back();  
+    this.location.back();
   }
 }

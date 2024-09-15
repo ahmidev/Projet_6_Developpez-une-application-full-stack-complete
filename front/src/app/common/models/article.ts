@@ -1,6 +1,4 @@
 import { Author } from "./author";
-import { Topic } from "./topic";
-
 export interface Article {
 
     id : number;

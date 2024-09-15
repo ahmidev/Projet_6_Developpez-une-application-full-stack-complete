@@ -1,40 +1,58 @@
 package com.openclassrooms.mddapi.mappers;
 
 import com.openclassrooms.mddapi.dtos.PostDTO;
+import com.openclassrooms.mddapi.mappers.CommentMapper;
+import com.openclassrooms.mddapi.mappers.TopicMapper;
+import com.openclassrooms.mddapi.mappers.UserMapper;
 import com.openclassrooms.mddapi.models.Post;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Mapper pour convertir les entités Post en DTO (Data Transfer Object) et inversement.
+ * Facilite la transformation des objets Post en PostDTO pour l'échange entre différentes couches de l'application.
+ */
 @Component
-@NoArgsConstructor
 public class PostMapper {
 
-    @Autowired
-    UserMapper userMapper;
+    private final UserMapper userMapper;
+    private final TopicMapper topicMapper;
+    private final CommentMapper commentMapper;
 
-    @Autowired
-    TopicMapper topicMapper;
-
-    @Autowired
-    CommentMapper commentMapper;
-
-    public List<PostDTO> toDto(List<Post> posts){
-        List<PostDTO> postsDto = new ArrayList<>();
-
-        for(Post post : posts){
-            PostDTO postDto = toDto(post);
-            postsDto.add(postDto);
-        }
-
-        return postsDto;
-
+    /**
+     * Constructeur pour injecter les dépendances nécessaires au PostMapper.
+     *
+     * @param userMapper mapper pour les utilisateurs
+     * @param topicMapper mapper pour les sujets (topics)
+     * @param commentMapper mapper pour les commentaires
+     */
+    public PostMapper(UserMapper userMapper, TopicMapper topicMapper, CommentMapper commentMapper) {
+        this.userMapper = userMapper;
+        this.topicMapper = topicMapper;
+        this.commentMapper = commentMapper;
     }
 
-    public PostDTO toDto(Post post){
+    /**
+     * Convertit une liste d'entités Post en une liste de PostDTO.
+     *
+     * @param posts liste des entités Post à convertir
+     * @return liste de PostDTO correspondante
+     */
+    public List<PostDTO> toDto(List<Post> posts) {
+        return posts.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Convertit une entité Post en PostDTO.
+     *
+     * @param post l'entité Post à convertir
+     * @return le PostDTO correspondant
+     */
+    public PostDTO toDto(Post post) {
         PostDTO postDto = new PostDTO();
         postDto.setId(post.getId());
         postDto.setTitle(post.getTitle());

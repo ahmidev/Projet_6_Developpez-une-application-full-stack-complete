@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  
+
   constructor(private router: Router) { }
-  
-  ngOnInit(): void {}
+
+  ngOnInit(): void { }
 
   goToLogin(): void {
     this.router.navigate(['/login']);
@@ -19,6 +19,6 @@ export class HomeComponent implements OnInit {
 
   goToSignUp(): void {
     console.log('clic')
-    this.router.navigate(['/sign-up']);  
+    this.router.navigate(['/sign-up']);
   }
 }
