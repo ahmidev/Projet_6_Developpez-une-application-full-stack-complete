@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Article } from 'src/app/common/models/article';
 import { User } from 'src/app/common/models/user';
 import { ArticleService } from 'src/app/services/article.service';
-import { SubscriptionService } from 'src/app/services/subscription.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -22,7 +21,7 @@ export class ArticleFeedComponent implements OnInit {
     private articleService: ArticleService,
     private userService: UserService,
     private toastr: ToastrService,
-    private router: Router 
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +29,6 @@ export class ArticleFeedComponent implements OnInit {
       next: (user: User) => {
         this.currentUser = user;
         console.log('Current user:', this.currentUser);
-        //this.toastr.success('Utilisateur authentifié avec succès', 'Succès');
         this.loadSubscribedArticles(this.currentUser.id);
       },
       error: (error: any) => {
@@ -56,7 +54,7 @@ export class ArticleFeedComponent implements OnInit {
           topic: {
             id: item.topicDTO.id,
             name: item.topicDTO.name,
-            articles: data.filter((article:any) => article.topicDTO.id === item.topicDTO.id) || null 
+            articles: data.filter((article: any) => article.topicDTO.id === item.topicDTO.id) || null
           },
           comments: item.comments || null
         }));
@@ -72,7 +70,7 @@ export class ArticleFeedComponent implements OnInit {
 
   viewArticle(articleId: number): void {
     this.router.navigate(['/article', articleId]);
-  } 
+  }
 
   sortArticlesByDate(): void {
     this.articles.sort((a, b) => {
@@ -81,8 +79,8 @@ export class ArticleFeedComponent implements OnInit {
 
       if (dateA && dateB) {
         return this.isAscending
-          ? dateA.getTime() - dateB.getTime()  
-          : dateB.getTime() - dateA.getTime(); 
+          ? dateA.getTime() - dateB.getTime()
+          : dateB.getTime() - dateA.getTime();
       }
 
       if (!dateA) return 1;
@@ -95,5 +93,5 @@ export class ArticleFeedComponent implements OnInit {
     console.log('Articles triés par date:', this.articles);
     this.toastr.info('Articles triés par date', 'Information');
   }
-  
+
 }

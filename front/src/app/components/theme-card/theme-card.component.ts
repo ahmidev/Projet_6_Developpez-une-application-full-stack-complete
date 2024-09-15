@@ -8,11 +8,11 @@ import { Topic } from 'src/app/common/models/topic';
 })
 export class ThemeCardComponent implements OnInit {
 
-  @Input() theme!: Topic;  
-  @Input() isSubscribed!: boolean;  
-  @Output() subscribe = new EventEmitter<number>(); 
+  @Input() theme!: Topic;
+  @Input() isSubscribed!: boolean;
+  @Output() subscribe = new EventEmitter<number>();
   @Input() inProfile: boolean = false;
-  @Output() unsubscribe = new EventEmitter<number>(); 
+  @Output() unsubscribe = new EventEmitter<number>();
 
   constructor() { }
 
@@ -21,7 +21,7 @@ export class ThemeCardComponent implements OnInit {
 
 
   subscribeToTheme(): void {
-    this.subscribe.emit(this.theme.id);  
+    this.subscribe.emit(this.theme.id);
   }
   handleSubscription(): void {
     if (this.inProfile && this.isSubscribed) {
@@ -31,5 +31,5 @@ export class ThemeCardComponent implements OnInit {
     }
   }
 
-  
+
 }

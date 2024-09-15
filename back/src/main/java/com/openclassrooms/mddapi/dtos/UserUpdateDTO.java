@@ -22,7 +22,7 @@ public class UserUpdateDTO {
     private String name;
 
     @NotBlank
-    private String tocken;
+    private String token;
 
     @Column(name = "created_at")
     @JsonProperty("created_at")

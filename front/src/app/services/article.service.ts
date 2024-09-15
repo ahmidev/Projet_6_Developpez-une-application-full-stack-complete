@@ -16,15 +16,15 @@ export class ArticleService {
   constructor(private http: HttpClient) { }
   
   createArticle(post: Articles): Observable<Articles> {
-    return this.http.post<Articles>(`${this.pathService}post/create`, post);
+    return this.http.post<Articles>(`${this.pathService}posts`, post);
   }
 
   getArticlesByUser(userId: number): Observable<Article[]> {
-    return this.http.get<Article[]>(`${this.pathService}post/user/${userId}`);
+    return this.http.get<Article[]>(`${this.pathService}posts/user/${userId}`);
   }
 
   getArticleById(articleId: String): Observable<Article> {
-    return this.http.get<Article>(`${this.pathService}post/${articleId}`);
+    return this.http.get<Article>(`${this.pathService}posts/${articleId}`);
   }
 
 }

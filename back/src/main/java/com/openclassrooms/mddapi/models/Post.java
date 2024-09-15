@@ -19,9 +19,11 @@ public class Post {
     private Long id;
 
     private String title;
-    
-    @Column(length = 5000)
+
+    @Lob
+    @Column
     private String content;
+
 
     @ManyToOne
     @JoinColumn(name="owner_id",nullable = false)
