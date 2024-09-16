@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreatePostDTO {
 
-    Long themeId;
+    Long topicId;
 
     Long userId;
 

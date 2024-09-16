@@ -1,0 +1,34 @@
+<div class="container min-vh-100 d-flex flex-column align-items-center">
+  <div class="w-100 mt-5" style="max-width: 600px">
+    <h2 class="text-center mb-4">Profil utilisateur</h2>
+
+    <app-profil-form
+      [user]="user"
+      (formSubmitted)="onSubmit($event)"
+    ></app-profil-form>
+
+    <button
+      type="button"
+      class="btn btn-outline-danger w-100"
+      (click)="logOut()"
+    >
+      Se déconnecter
+    </button>
+  </div>
+
+  <div class="div-separator"></div>
+
+  <!-- Section des abonnements -->
+  <h4 class="text-center mb-4">Abonnements</h4>
+  <div class="row w-100">
+    <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let theme of themes">
+      <app-theme-card
+        [theme]="theme"
+        [isSubscribed]="isSubscribed(theme.id)"
+        [inProfile]="true"
+        (unsubscribe)="unsubscribeFromTheme(theme.id)"
+      >
+      </app-theme-card>
+    </div>
+  </div>
+</div>

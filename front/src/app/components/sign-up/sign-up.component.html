@@ -1,0 +1,101 @@
+<!-- Navbar qui s'affiche sur grand écran -->
+<nav class="navbar navbar-light bg-light d-none d-lg-block">
+  <div class="container-fluid">
+    <a href="#" class="navbar-brand">
+      <img
+        src="/assets/logo_p6.png"
+        alt="MDD Logo"
+        class="img-fluid logo-desktop"
+      />
+    </a>
+  </div>
+</nav>
+
+<div class="container d-flex flex-column mt-5 align-items-center min-vh-100">
+  <div class="w-100 mb-2 d-flex justify-content-start">
+    <a class="text-dark arrow-back cursor-pointer" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i>
+    </a>
+  </div>
+
+  <!-- Logo visible uniquement sur mobile -->
+  <div class="logo mb-4 d-lg-none">
+    <img
+      src="/assets/logo_p6.png"
+      alt="MDD Logo"
+      class="img-fluid logo-mobile"
+    />
+  </div>
+
+  <h2 class="mb-5">Inscription</h2>
+
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="submit()"
+    class="w-100 form-inscription"
+  >
+    <div class="mb-3">
+      <label for="username" class="form-label">Nom d'utilisateur</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        class="form-control"
+        placeholder="Entrez votre nom d'utilisateur"
+      />
+      <div
+        *ngIf="
+          formControls['username'].invalid && formControls['username'].touched
+        "
+        class="text-danger"
+      >
+        Le nom d'utilisateur est requis.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Adresse e-mail</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="Entrez votre adresse e-mail"
+      />
+      <div
+        *ngIf="formControls['email'].invalid && formControls['email'].touched"
+        class="text-danger"
+      >
+        Une adresse e-mail valide est requise.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control"
+        placeholder="Entrez votre mot de passe"
+      />
+      <div
+        *ngIf="
+          formControls['password'].invalid && formControls['password'].touched
+        "
+        class="text-danger"
+      >
+        Le mot de passe doit contenir au moins 8 caractères, une majuscule, une
+        minuscule, un chiffre et un caractère spécial.
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary w-100"
+      [disabled]="registerForm.invalid"
+    >
+      S'inscrire
+    </button>
+  </form>
+</div>

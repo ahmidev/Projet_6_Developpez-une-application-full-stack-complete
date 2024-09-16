@@ -4,6 +4,9 @@ import com.openclassrooms.mddapi.models.Topic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Interface pour les opérations CRUD sur les entités Sujet.
+ */
 @Repository
 public interface TopicRepository extends JpaRepository<Topic, Long> {
 }

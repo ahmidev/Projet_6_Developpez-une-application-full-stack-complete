@@ -1,0 +1,19 @@
+<div class="card h-100">
+  <div class="card-body">
+    <h4 class="card-title fw-bold">{{ theme.name }}</h4>
+    <p class="card-text">{{ theme.description }}</p>
+    <button
+      class="btn w-100"
+      [ngClass]="isSubscribed ? 'btn-danger' : 'btn-primary'"
+      (click)="handleSubscription()"
+    >
+      {{
+        isSubscribed && inProfile
+          ? "Se désabonner"
+          : isSubscribed
+          ? "Déjà abonné"
+          : "S'abonner"
+      }}
+    </button>
+  </div>
+</div>

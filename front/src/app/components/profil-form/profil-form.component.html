@@ -1,0 +1,44 @@
+<div>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="username" class="form-label">Nom d'utilisateur</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        formControlName="username"
+        placeholder="Nom d'utilisateur"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+        placeholder="email@email.fr"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Nouveau mot de passe</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+        placeholder="Nouveau mot de passe (facultatif)"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary w-100 mb-3"
+      [disabled]="!profileForm.valid"
+    >
+      Sauvegarder
+    </button>
+  </form>
+</div>
