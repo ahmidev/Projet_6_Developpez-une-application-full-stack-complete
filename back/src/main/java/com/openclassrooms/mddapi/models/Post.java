@@ -16,6 +16,11 @@ public class Post {
 
     private String title;
 
+<<<<<<< Updated upstream
+=======
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+>>>>>>> Stashed changes
     private String content;
     @ManyToOne
     @JoinColumn(name="owner_id",nullable = false)
