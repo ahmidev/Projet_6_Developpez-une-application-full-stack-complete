@@ -1,11 +1,13 @@
-import { Author } from "./author";
+import { Comment } from "./comment";
+import { Topic } from "./topic";
+import { UserResponse } from "./userResponse";
 export interface Article {
 
-    id : number;
-    title: string;
-    content: string;
-    createdAt: Date | null;
-    author: Author ;
-    topic: any | null;
-    comments: Comment[] | null;
+  id: number;
+  title: string;
+  content: string;
+  user: UserResponse;
+  topicDTO: Topic;
+  comments: Comment[];
+  createdAt: string; 
   }

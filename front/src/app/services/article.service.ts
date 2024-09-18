@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Articles } from '../common/models/articles';
 import { Observable } from 'rxjs';
 import { Article } from '../common/models/article';
+import { NewArticle } from '../common/models/newArticle';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ArticleService {
   
   constructor(private http: HttpClient) { }
   
-  createArticle(post: Articles): Observable<Articles> {
+  createArticle(post: NewArticle): Observable<Articles> {
     return this.http.post<Articles>(`${this.pathService}posts`, post);
   }
 

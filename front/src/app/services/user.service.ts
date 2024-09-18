@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 import { User } from '../common/models/user';
 import { Observable } from 'rxjs';
 import { Author } from '../common/models/author';
+import { UserDto } from '../common/models/userDto';
+import { UserResponse } from '../common/models/userResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}auth/me`);
   }
 
-  updateUserProfile( user: User): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}users/auth/me`, user);
+  updateUserProfile( user: UserDto): Observable<UserResponse > {
+    return this.http.put<UserResponse >(`${this.baseUrl}users/auth/me`, user);
   }
 }

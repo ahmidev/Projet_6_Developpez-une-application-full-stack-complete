@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToSignUp(): void {
-    console.log('clic')
     this.router.navigate(['/sign-up']);
   }
 }

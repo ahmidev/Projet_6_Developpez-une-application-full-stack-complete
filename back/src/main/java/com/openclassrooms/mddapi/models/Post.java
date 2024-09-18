@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,9 +20,8 @@ public class Post {
     private String title;
 
     @Lob
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
-
 
     @ManyToOne
     @JoinColumn(name="owner_id",nullable = false)
