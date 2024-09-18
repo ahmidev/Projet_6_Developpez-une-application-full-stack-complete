@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Article } from 'src/app/common/models/article';
 import { User } from 'src/app/common/models/user';
 import { ArticleService } from 'src/app/services/article.service';
@@ -11,11 +12,14 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './article-feed.component.html',
   styleUrls: ['./article-feed.component.scss']
 })
-export class ArticleFeedComponent implements OnInit {
+export class ArticleFeedComponent implements OnInit, OnDestroy {
 
   currentUser!: User;
   articles!: Article[];
   isAscending: boolean = false;
+
+  private userSubscription!: Subscription;
+  private articleSubscription!: Subscription;
 
   constructor(
     private articleService: ArticleService,
@@ -25,44 +29,45 @@ export class ArticleFeedComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getAuthenticatedUser().subscribe({
+    this.userSubscription = this.userService.getAuthenticatedUser().subscribe({
       next: (user: User) => {
         this.currentUser = user;
-        console.log('Current user:', this.currentUser);
         this.loadSubscribedArticles(this.currentUser.id);
       },
-      error: (error: any) => {
-        console.error('Error fetching authenticated user:', error);
+      error: (error: Error) => {
         this.toastr.error('Erreur lors de la récupération de l\'utilisateur authentifié', 'Erreur');
       }
     });
   }
 
   loadSubscribedArticles(userId: number): void {
-    this.articleService.getArticlesByUser(userId).subscribe({
+    this.articleSubscription = this.articleService.getArticlesByUser(userId).subscribe({
       next: (data: Article[]) => {
-        this.articles = data.map((item: any) => ({
+        this.articles = data.map((item: Article) => ({
           id: item.id,
           title: item.title,
           content: item.content,
           createdAt: item.createdAt,
-          author: {
+          user: {
             id: item.user.id,
-            name: item.user.name,
-            email: item.user.email
+            userName: item.user.userName, 
+            email: item.user.email,
+            subscriptions: item.user.subscriptions, 
+            created_at: item.user.created_at, 
+            updated_at: item.user.updated_at 
           },
-          topic: {
+          topicDTO: {
             id: item.topicDTO.id,
             name: item.topicDTO.name,
-            articles: data.filter((article: any) => article.topicDTO.id === item.topicDTO.id) || null
+            description: item.topicDTO.description, 
+            subscriptions: item.topicDTO.subscriptions, 
+            articles: data.filter((article: Article) => article.topicDTO.id === item.topicDTO.id) || null
           },
-          comments: item.comments || null
+          comments: item.comments || []
         }));
-        console.log('Articles:', this.articles);
         this.toastr.success('Articles chargés avec succès', 'Succès');
       },
-      error: (error: any) => {
-        console.error('Error fetching articles:', error);
+      error: (error: Error) => {
         this.toastr.error('Erreur lors de la récupération des articles', 'Erreur');
       }
     });
@@ -90,8 +95,16 @@ export class ArticleFeedComponent implements OnInit {
 
     this.isAscending = !this.isAscending;
 
-    console.log('Articles triés par date:', this.articles);
     this.toastr.info('Articles triés par date', 'Information');
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+    if (this.articleSubscription) {
+      this.articleSubscription.unsubscribe();
+    }
   }
 
 }

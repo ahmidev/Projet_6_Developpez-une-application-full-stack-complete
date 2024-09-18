@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthSuccess } from 'src/app/common/models/authSuccess';
+import { UserResponse } from 'src/app/common/models/userResponse';
 import { AuthService } from 'src/app/services/auth.service';
 import { SessionService } from 'src/app/services/session.service';
 
@@ -11,9 +13,13 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy  {
 
   loginForm!: FormGroup;
+
+  private loginSubscription!: Subscription;
+  private userSubscription!: Subscription;
+
 
   constructor(
     private fb: FormBuilder,
@@ -36,14 +42,11 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-
-      this.authService.login(this.loginForm.value).subscribe({
+      this.loginSubscription = this.authService.login(this.loginForm.value).subscribe({
         next: (response: AuthSuccess) => {
-          console.log(response);
           localStorage.setItem('token', response.token);
           this.toastr.success('Connexion réussie !', 'Succès');
-          this.authService.me().subscribe((user: any) => {
+          this.userSubscription = this.authService.me().subscribe((user: UserResponse) => {
             this.sessionService.logIn(user);
             this.router.navigate(['/article-feed']);
           });
@@ -63,5 +66,14 @@ export class LoginComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe();
+    }
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }

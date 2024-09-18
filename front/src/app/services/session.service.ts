@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../common/models/user';
+import { UserResponse } from '../common/models/userResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,8 @@ import { User } from '../common/models/user';
 export class SessionService {
 
 
-  private userSubject = new BehaviorSubject<User | undefined>(undefined);
-  public user$: Observable<User | undefined> = this.userSubject.asObservable();
+  private userSubject = new BehaviorSubject<UserResponse  | undefined>(undefined);
+  public user$: Observable<UserResponse  | undefined> = this.userSubject.asObservable();
 
   private isLoggedSubject = new BehaviorSubject<boolean>(false);
   public isLogged$: Observable<boolean> = this.isLoggedSubject.asObservable();
@@ -28,7 +29,7 @@ export class SessionService {
     }
   }
 
-  public logIn(user: User): void {
+  public logIn(user: UserResponse ): void {
     localStorage.setItem('user', JSON.stringify(user));
     this.userSubject.next(user);
     this.isLoggedSubject.next(true);
@@ -45,7 +46,7 @@ export class SessionService {
     localStorage.setItem('token', newToken);
   }
 
-  public updateUserSubscriptions(updatedUser: User): void {
+  public updateUserSubscriptions(updatedUser: UserResponse ): void {
     this.userSubject.next(updatedUser);
     localStorage.setItem('user', JSON.stringify(updatedUser));
   }
@@ -54,8 +55,8 @@ export class SessionService {
     return this.isLoggedSubject.value;
   }
 
-  public getUser(): User | undefined {
-    return this.userSubject.value;
+  public getUser(): UserResponse {
+    return this.userSubject.value!;
   }
 
 }
