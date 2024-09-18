@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { RegisterRequest } from '../common/models/registerRequest';
 import { AuthSuccess } from '../common/models/authSuccess';
 import { LoginRequest } from '../common/models/loginRequest';
+import { Subscriptions } from '../common/models/subscriptions';
+import { UserResponse } from '../common/models/userResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,7 @@ export class AuthService {
     return this.httpClient.post<AuthSuccess>(`${this.pathService}/login`, loginRequest);
   }
 
-  public me(): Observable<any> {
-    return this.httpClient.get<any>(`${this.pathService}/me`);
+  public me(): Observable<UserResponse> {
+    return this.httpClient.get<UserResponse>(`${this.pathService}/me`);
   }
 }

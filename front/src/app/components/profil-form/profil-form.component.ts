@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/common/models/user';
+import { UserDto } from 'src/app/common/models/userDto';
+import { UserResponse } from 'src/app/common/models/userResponse';
 
 @Component({
   selector: 'app-profil-form',
@@ -9,8 +11,8 @@ import { User } from 'src/app/common/models/user';
 })
 export class ProfilFormComponent implements OnInit {
 
-  @Input() user!: User; 
-  @Output() formSubmitted = new EventEmitter<any>(); 
+  @Input() user!: UserResponse; 
+  @Output() formSubmitted = new EventEmitter<UserDto>(); 
   profileForm!: FormGroup;
 
   constructor(private fb: FormBuilder) { }
@@ -21,8 +23,8 @@ export class ProfilFormComponent implements OnInit {
 
   initForm(): void {
     this.profileForm = this.fb.group({
-      username: [this.user?.name || '', Validators.required],
-      email: [this.user?.email || '', [Validators.required, Validators.email]],
+      userName: [this.user.userName || '', Validators.required],
+      email: [this.user.email || '', [Validators.required, Validators.email]],
       password: ['', [
         Validators.minLength(8),
         Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).*$/)
@@ -32,8 +34,8 @@ export class ProfilFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.profileForm.valid) {
-      const formData: any = {
-        username: this.profileForm.get('username')?.value,
+      const formData: UserDto = {
+        userName: this.profileForm.get('username')?.value,
         email: this.profileForm.get('email')?.value
       };
 

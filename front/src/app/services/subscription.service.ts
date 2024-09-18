@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UserResponse } from '../common/models/userResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,13 @@ export class SubscriptionService {
 
   constructor(private http: HttpClient) { }
 
-  createSubscription(userId: number, topicId: number): Observable<any> {
+  createSubscription(userId: number, topicId: number): Observable<UserResponse> {
     const subscriptionData = { topicId, userId };
-    return this.http.post(`${this.baseUrl}`, subscriptionData);
+    return this.http.post<UserResponse>(`${this.baseUrl}`, subscriptionData);
   }
 
-  deleteSubscription(userId: number, topicId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${userId}/${topicId}`);
+  deleteSubscription(userId: number, topicId: number): Observable<UserResponse> {
+    return this.http.delete<UserResponse>(`${this.baseUrl}/${userId}/${topicId}`);
   }
 
   

@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { Location } from '@angular/common';  
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy  {
 
   registerForm!: FormGroup; 
+
+  private registerSubscription!: Subscription;
 
   constructor(private fb: FormBuilder, 
     private authService: AuthService,
@@ -42,30 +45,31 @@ export class SignUpComponent implements OnInit {
 
   submit(): void {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
 
-      this.authService.register(this.registerForm.value).subscribe({
+      this.registerSubscription = this.authService.register(this.registerForm.value).subscribe({
         next: (response) => {
           this.toastr.success('Inscription réussie !', 'Succès');
-          console.log('Inscription réussie !', response);
           this.router.navigate(['/login']);
         },
         error: (error) => {
           this.toastr.error('Erreur lors de l\'inscription. Veuillez réessayer.', 'Erreur');
-          console.error('Erreur lors de l\'inscription :', error);
         },
         complete: () => {
-          console.log('Inscription complétée.');
         }
       });
     } else {
       this.toastr.warning('Le formulaire n\'est pas valide.', 'Avertissement');
-      console.log('Le formulaire n\'est pas valide.');
     }
   }
   
 
   get formControls() {
     return this.registerForm.controls;
+  }
+
+  ngOnDestroy(): void {
+    if (this.registerSubscription) {
+      this.registerSubscription.unsubscribe();
+    }
   }
 }

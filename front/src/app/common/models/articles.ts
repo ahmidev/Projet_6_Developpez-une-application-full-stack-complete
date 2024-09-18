@@ -7,6 +7,6 @@ export interface Articles {
   content: string;
   createdAt: String | null;
   author: User ;
-  theme: any | null;
+  theme: Topic | null;
   comments: Comment[] | null;
 }
