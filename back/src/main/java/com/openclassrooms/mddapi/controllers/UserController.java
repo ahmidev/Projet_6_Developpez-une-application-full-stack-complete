@@ -50,7 +50,7 @@ public class UserController {
 
             UserUpdateDTO updatedUser = userService.updateUserProfile(
                     user.getId(),
-                    userRegisterDTO.getUsername(),
+                    userRegisterDTO.getUserName(),
                     userRegisterDTO.getEmail(),
                     userRegisterDTO.getPassword()
             );

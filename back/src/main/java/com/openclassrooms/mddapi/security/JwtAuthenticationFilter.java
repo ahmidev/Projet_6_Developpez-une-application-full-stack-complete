@@ -17,6 +17,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 /**
@@ -34,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     /**
      * Constructeur avec injection des dépendances.
      *
-     * @param tokenProvider le fournisseur de jeton JWT
+     * @param tokenProvider      le fournisseur de jeton JWT
      * @param userDetailsService le service de gestion des utilisateurs
      */
     public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, @Lazy UserDetailsService userDetailsService) {
@@ -46,11 +47,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      * Filtre les requêtes HTTP pour vérifier et valider le JWT.
      * Si le jeton est valide, l'utilisateur est authentifié dans le contexte de sécurité de Spring.
      *
-     * @param request l'objet HttpServletRequest de la requête
-     * @param response l'objet HttpServletResponse de la réponse
+     * @param request     l'objet HttpServletRequest de la requête
+     * @param response    l'objet HttpServletResponse de la réponse
      * @param filterChain la chaîne des filtres
      * @throws ServletException si une erreur survient lors du traitement de la requête
-     * @throws IOException si une erreur d'entrée/sortie survient lors du traitement de la requête
+     * @throws IOException      si une erreur d'entrée/sortie survient lors du traitement de la requête
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

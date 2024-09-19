@@ -20,7 +20,7 @@ public interface SubscriptionService {
     /**
      * Supprime l'abonnement d'un utilisateur à un sujet spécifique.
      *
-     * @param userId l'ID de l'utilisateur
+     * @param userId  l'ID de l'utilisateur
      * @param themeId l'ID du sujet (topic)
      * @return un DTO de l'utilisateur après la suppression de l'abonnement
      */

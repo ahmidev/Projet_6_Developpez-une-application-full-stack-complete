@@ -27,7 +27,7 @@ public class TopicServiceImpl implements TopicService {
      * Constructeur avec injection des dépendances.
      *
      * @param topicRepository le repository permettant l'accès aux données des sujets
-     * @param topicMapper le mapper pour convertir les entités Topic en DTO
+     * @param topicMapper     le mapper pour convertir les entités Topic en DTO
      */
     @Autowired
     public TopicServiceImpl(TopicRepository topicRepository, TopicMapper topicMapper) {
@@ -41,9 +41,9 @@ public class TopicServiceImpl implements TopicService {
      *
      * @return une map contenant la liste des sujets sous forme de DTOs
      */
-    public Map<String, List<TopicDTO>> getAllTopics(){
+    public Map<String, List<TopicDTO>> getAllTopics() {
 
-        List<Topic> themes =  topicRepository.findAll();
+        List<Topic> themes = topicRepository.findAll();
 
         return Map.of("topics", topicMapper.toDto(themes));
     }

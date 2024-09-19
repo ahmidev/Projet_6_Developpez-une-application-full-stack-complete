@@ -31,10 +31,10 @@ public class CommentServiceImpl implements CommentService {
     /**
      * Constructeur avec injection des dépendances.
      *
-     * @param commentMapper le mapper pour convertir les entités Comment en DTO et inversement
+     * @param commentMapper     le mapper pour convertir les entités Comment en DTO et inversement
      * @param commentRepository le repository pour gérer les commentaires
-     * @param postRepository le repository pour gérer les posts
-     * @param userRepository le repository pour gérer les utilisateurs
+     * @param postRepository    le repository pour gérer les posts
+     * @param userRepository    le repository pour gérer les utilisateurs
      */
     public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository, PostRepository postRepository, UserRepository userRepository) {
         this.commentMapper = commentMapper;
@@ -50,19 +50,19 @@ public class CommentServiceImpl implements CommentService {
      * @return le DTO du commentaire créé
      * @throws ResponseStatusException si l'utilisateur ou le post n'existent pas
      */
-    public CommentDTO createComment(CreateCommentDTO createCommentDto){
+    public CommentDTO createComment(CreateCommentDTO createCommentDto) {
         Comment comment = commentMapper.toEntity(createCommentDto);
 
         Optional<User> optionalUser = userRepository.findById(createCommentDto.getUserId());
         Optional<Post> optionalArticle = postRepository.findById(createCommentDto.getArticleId());
 
-        if(optionalArticle.isPresent() && optionalUser.isPresent()){
+        if (optionalArticle.isPresent() && optionalUser.isPresent()) {
             comment.setUser(optionalUser.get());
-            comment.setPost(    optionalArticle.get());
+            comment.setPost(optionalArticle.get());
             commentRepository.saveAndFlush(comment);
 
             return commentMapper.toDto(comment);
         }
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"erreur dans la récuperation de l'article ou du user");
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "erreur dans la récuperation de l'article ou du user");
     }
 }

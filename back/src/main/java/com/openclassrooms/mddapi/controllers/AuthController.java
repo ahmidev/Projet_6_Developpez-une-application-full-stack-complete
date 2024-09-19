@@ -35,7 +35,7 @@ public class AuthController {
      *
      * @param authService service d'authentification
      * @param userService service de gestion des utilisateurs
-     * @param userMapper mapper pour transformer les entités User en DTO
+     * @param userMapper  mapper pour transformer les entités User en DTO
      */
     public AuthController(AuthService authService, UserService userService, UserMapper userMapper) {
         this.authService = authService;

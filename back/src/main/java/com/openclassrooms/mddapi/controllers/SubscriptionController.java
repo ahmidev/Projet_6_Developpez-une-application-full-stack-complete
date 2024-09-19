@@ -43,7 +43,7 @@ public class SubscriptionController {
      * Endpoint pour supprimer un abonnement.
      * Cette méthode permet à un utilisateur de se désabonner d'un thème spécifique en utilisant l'ID de l'utilisateur et l'ID du thème.
      *
-     * @param userId l'ID de l'utilisateur qui souhaite se désabonner
+     * @param userId  l'ID de l'utilisateur qui souhaite se désabonner
      * @param topicId l'ID du thème auquel l'utilisateur est abonné
      * @return les détails de l'utilisateur mis à jour après la suppression de l'abonnement
      */
