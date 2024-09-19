@@ -9,7 +9,7 @@ public class UserRegisterDTO {
     private String email;
 
     @NotBlank
-    private String username;
+    private String userName;
 
     @NotBlank
     private String password;

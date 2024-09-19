@@ -32,9 +32,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
      * Constructeur avec injection des dépendances.
      *
      * @param subscriptionRepository le repository pour gérer les abonnements
-     * @param userRepository le repository pour gérer les utilisateurs
-     * @param topicRepository le repository pour gérer les sujets (topics)
-     * @param userMapper le mapper pour convertir les entités utilisateur en DTO
+     * @param userRepository         le repository pour gérer les utilisateurs
+     * @param topicRepository        le repository pour gérer les sujets (topics)
+     * @param userMapper             le mapper pour convertir les entités utilisateur en DTO
      */
     public SubscriptionServiceImpl(SubscriptionRepository subscriptionRepository, UserRepository userRepository, TopicRepository topicRepository, UserMapper userMapper) {
         this.subscriptionRepository = subscriptionRepository;
@@ -49,7 +49,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
      *
      * @param subscriptionDto les informations de l'abonnement à créer
      * @return un DTO de l'utilisateur mis à jour après la création de l'abonnement
-     * @throws ResourceNotFoundException si l'utilisateur ou le sujet n'existent pas
+     * @throws ResourceNotFoundException          si l'utilisateur ou le sujet n'existent pas
      * @throws SubscriptionAlreadyExistsException si l'utilisateur est déjà abonné au sujet
      */
     @Transactional
@@ -77,7 +77,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     /**
      * Supprime l'abonnement d'un utilisateur à un sujet spécifique.
      *
-     * @param userId l'ID de l'utilisateur
+     * @param userId  l'ID de l'utilisateur
      * @param topicId l'ID du sujet (topic)
      * @return un DTO de l'utilisateur mis à jour après la suppression de l'abonnement
      * @throws ResourceNotFoundException si l'abonnement ou l'utilisateur n'existent pas

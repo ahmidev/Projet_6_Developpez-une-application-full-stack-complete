@@ -4,6 +4,7 @@ import com.openclassrooms.mddapi.dtos.UserLoginDTO;
 import com.openclassrooms.mddapi.dtos.UserRegisterDTO;
 import com.openclassrooms.mddapi.models.AuthSuccess;
 import com.openclassrooms.mddapi.models.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * Interface pour le service d'authentification.

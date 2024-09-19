@@ -15,9 +15,9 @@ public interface UserService {
     /**
      * Met à jour le profil d'un utilisateur avec les nouvelles informations fournies.
      *
-     * @param userId l'ID de l'utilisateur à mettre à jour
+     * @param userId      l'ID de l'utilisateur à mettre à jour
      * @param newUsername le nouveau nom d'utilisateur
-     * @param newEmail la nouvelle adresse email
+     * @param newEmail    la nouvelle adresse email
      * @param newPassword le nouveau mot de passe (facultatif)
      * @return un DTO contenant les informations mises à jour de l'utilisateur
      */

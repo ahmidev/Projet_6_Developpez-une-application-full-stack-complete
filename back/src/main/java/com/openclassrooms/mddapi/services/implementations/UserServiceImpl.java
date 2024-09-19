@@ -34,9 +34,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     /**
      * Constructeur avec injection des dépendances.
      *
-     * @param userRepository le repository pour gérer les utilisateurs
-     * @param userMapper le mapper pour convertir les entités utilisateur en DTO
-     * @param tokenProvider le fournisseur de jeton JWT pour générer des tokens d'authentification
+     * @param userRepository  le repository pour gérer les utilisateurs
+     * @param userMapper      le mapper pour convertir les entités utilisateur en DTO
+     * @param tokenProvider   le fournisseur de jeton JWT pour générer des tokens d'authentification
      * @param passwordEncoder l'encodeur de mot de passe pour sécuriser les mots de passe
      */
     @Autowired
@@ -52,9 +52,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      * Met à jour le profil de l'utilisateur, incluant son nom, son email et éventuellement son mot de passe.
      * Si le mot de passe est mis à jour, un nouveau token JWT est généré.
      *
-     * @param userId l'ID de l'utilisateur à mettre à jour
+     * @param userId      l'ID de l'utilisateur à mettre à jour
      * @param newUsername le nouveau nom d'utilisateur
-     * @param newEmail le nouvel email de l'utilisateur
+     * @param newEmail    le nouvel email de l'utilisateur
      * @param newPassword le nouveau mot de passe de l'utilisateur (peut être null)
      * @return un DTO de l'utilisateur mis à jour
      * @throws EntityNotFoundException si l'utilisateur n'existe pas

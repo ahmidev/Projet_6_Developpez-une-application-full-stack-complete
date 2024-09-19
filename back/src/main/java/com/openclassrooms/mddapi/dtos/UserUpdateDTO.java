@@ -19,7 +19,7 @@ public class UserUpdateDTO {
     private String email;
 
     @NotBlank
-    private String name;
+    private String userName;
 
     @NotBlank
     private String token;
