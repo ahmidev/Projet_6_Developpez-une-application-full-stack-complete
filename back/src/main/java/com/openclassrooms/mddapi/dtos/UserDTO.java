@@ -19,7 +19,7 @@ public class UserDTO {
     private String email;
 
 
-    private String name;
+    private String userName;
 
 
     @Column(name = "created_at")

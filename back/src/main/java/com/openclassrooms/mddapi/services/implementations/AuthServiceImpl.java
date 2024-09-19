@@ -25,9 +25,9 @@ public class AuthServiceImpl implements AuthService {
     /**
      * Constructeur avec injection des dépendances.
      *
-     * @param userRepository le repository pour gérer les utilisateurs
+     * @param userRepository  le repository pour gérer les utilisateurs
      * @param passwordEncoder l'encodeur de mot de passe pour sécuriser les mots de passe
-     * @param tokenProvider le fournisseur de jeton JWT pour générer les tokens
+     * @param tokenProvider   le fournisseur de jeton JWT pour générer les tokens
      */
     public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider tokenProvider) {
         this.userRepository = userRepository;
@@ -46,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
 
         User user = new User();
         user.setEmail(userRegisterDTO.getEmail());
-        user.setName(userRegisterDTO.getUsername());
+        user.setName(userRegisterDTO.getUserName());
         user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
         User createdUser = userRepository.save(user);
         String token = tokenProvider.generateToken(createdUser);

@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.security;
 
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,7 +31,7 @@ public class SecurityConfig {
     /**
      * Constructeur de la configuration de sécurité.
      *
-     * @param unauthorizedHandler le point d'entrée pour gérer les accès non autorisés
+     * @param unauthorizedHandler     le point d'entrée pour gérer les accès non autorisés
      * @param jwtAuthenticationFilter le filtre JWT pour authentifier les requêtes
      */
     public SecurityConfig(JwtAuthenticationEntryPoint unauthorizedHandler, JwtAuthenticationFilter jwtAuthenticationFilter) {

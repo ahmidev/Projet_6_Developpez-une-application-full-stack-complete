@@ -23,8 +23,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
      * Méthode appelée lorsque l'utilisateur tente d'accéder à une ressource sécurisée sans être authentifié.
      * Cette méthode envoie une réponse d'erreur HTTP 401 (Unauthorized).
      *
-     * @param request l'objet HttpServletRequest de la requête
-     * @param response l'objet HttpServletResponse de la réponse
+     * @param request       l'objet HttpServletRequest de la requête
+     * @param response      l'objet HttpServletResponse de la réponse
      * @param authException l'exception soulevée lors de l'échec de l'authentification
      * @throws IOException si une erreur d'entrée/sortie survient lors de l'envoi de la réponse
      */

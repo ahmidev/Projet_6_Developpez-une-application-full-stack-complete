@@ -38,7 +38,7 @@ public class UserMapper {
         User user = new User();
         user.setEmail(userRegisterDTO.getEmail());
         user.setPassword(userRegisterDTO.getPassword());
-        user.setName(userRegisterDTO.getUsername());
+        user.setName(userRegisterDTO.getUserName());
         return user;
     }
 
@@ -71,7 +71,7 @@ public class UserMapper {
         UserDTO userDto = new UserDTO();
         userDto.setCreatedAt(user.getCreatedAt());
         userDto.setUpdatedAt(user.getUpdatedAt());
-        userDto.setName(user.getName());
+        userDto.setUserName(user.getName());
         userDto.setEmail(user.getEmail());
         userDto.setId(user.getId());
         userDto.setSubscriptions(subscriptionMapper.toDto(user.getSubscriptions()));
@@ -91,7 +91,7 @@ public class UserMapper {
         UserUpdateDTO userUpdateDTO = new UserUpdateDTO();
         userUpdateDTO.setId(user.getId());
         userUpdateDTO.setEmail(user.getEmail());
-        userUpdateDTO.setName(user.getName());
+        userUpdateDTO.setUserName(user.getName());
         userUpdateDTO.setCreatedAt(user.getCreatedAt());
         userUpdateDTO.setUpdatedAt(user.getUpdatedAt());
         userUpdateDTO.setSubscriptions(subscriptionMapper.toDto(user.getSubscriptions()));

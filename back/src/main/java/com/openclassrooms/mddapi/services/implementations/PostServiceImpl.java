@@ -24,7 +24,7 @@ import java.util.Optional;
  * Cette classe fournit des méthodes pour récupérer, créer et gérer les posts des utilisateurs.
  */
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
@@ -34,10 +34,10 @@ public class PostServiceImpl implements PostService{
     /**
      * Constructeur avec injection des dépendances.
      *
-     * @param postRepository le repository pour gérer les posts
-     * @param userRepository le repository pour gérer les utilisateurs
+     * @param postRepository  le repository pour gérer les posts
+     * @param userRepository  le repository pour gérer les utilisateurs
      * @param topicRepository le repository pour gérer les sujets (topics)
-     * @param postMapper le mapper pour convertir les entités Post en DTO
+     * @param postMapper      le mapper pour convertir les entités Post en DTO
      */
     public PostServiceImpl(PostRepository postRepository, UserRepository userRepository, TopicRepository topicRepository, PostMapper postMapper) {
         this.postRepository = postRepository;
@@ -52,10 +52,10 @@ public class PostServiceImpl implements PostService{
      * @param userId l'ID de l'utilisateur
      * @return une liste de DTOs représentant les posts
      */
-    public List<PostDTO> getAllUsersSubscribedPosts(Long userId){
-    List<Post> posts = postRepository.findByTopic_Subscriptions_UserId(userId);
+    public List<PostDTO> getAllUsersSubscribedPosts(Long userId) {
+        List<Post> posts = postRepository.findByTopic_Subscriptions_UserId(userId);
         posts.sort(Comparator.comparing(Post::getCreatedAt).reversed());
-    return postMapper.toDto(posts);
+        return postMapper.toDto(posts);
     }
 
 
@@ -67,14 +67,14 @@ public class PostServiceImpl implements PostService{
      * @throws RuntimeException si l'utilisateur ou le sujet n'existent pas
      */
     @Transactional
-    public PostDTO createAnPost(CreatePostDTO createPost){
+    public PostDTO createAnPost(CreatePostDTO createPost) {
         Post post = new Post();
         post.setContent(createPost.getContent());
         post.setTitle(createPost.getTitle());
 
         Optional<User> optUser = userRepository.findById(createPost.getUserId());
         Optional<Topic> optTheme = topicRepository.findById(createPost.getTopicId());
-        if(optTheme.isPresent() && optUser.isPresent() ){
+        if (optTheme.isPresent() && optUser.isPresent()) {
             post.setTopic(optTheme.get());
             post.setUser(optUser.get());
             postRepository.saveAndFlush(post);
@@ -93,10 +93,10 @@ public class PostServiceImpl implements PostService{
      * @throws RuntimeException si le post n'existe pas
      */
     @Transactional
-    public PostDTO getPostById(Long postId){
+    public PostDTO getPostById(Long postId) {
         Optional<Post> optPost = postRepository.findById(postId);
 
-        if(optPost.isPresent()){
+        if (optPost.isPresent()) {
             Post post = optPost.get();
             post.getComments();
             post.getTopic();
